@@ -30,5 +30,5 @@ namespace pav{
 
     void printList(knot* head);
 
-    double getLength(knot* head);
+    long getLength(knot* head);
 }
