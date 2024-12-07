@@ -1,6 +1,8 @@
+#include <exception>
 #include <cstdio>
 #include "linklist.h"
 using namespace pav;
+using namespace std;
 
 //add new knot to end of last knot 
 void pav::addKnot(knot* head,int element){
@@ -15,19 +17,31 @@ void pav::addKnot(knot* head,int element){
     }
 }
 
-//insert knot at index starts at 0
+//insert knot at index, starts at 0
 void pav::insertKnot(knot* head,int element,int index){
-    knot* current = head;
-    for(int i = 0; i < index;i++){
-        if(!current->next)break;//rethink!
-        current = current->next;
+    if((getLength(head))<index){
+        //printf("Out of Range");
+        throw 10;
     }
-    knot* hold = current->next;
-    current->next = new knot(hold,element);
+    knot* current = head;
+    if(getLength(head) ==index){
+        addKnot(head,element);
+    }else{
+        for(int i = 0; i < index;i++){
+            if(!current->next)break;//rethink!
+            current = current->next;
+        }
+        knot* hold = current->next;
+        current->next = new knot(hold,element);
+    }
 }
 
-//delete knot at index
+//delete knot at index, starts at 0
 void pav::deleteKnot(knot* head,int index){
+    if((getLength(head)-1)<index){
+        //printf("Out of Range");
+        throw 10;
+    }
     knot* current = head;
     for(int i = 0;i<index;i++){
         current = current->next;  
@@ -40,18 +54,18 @@ void pav::deleteKnot(knot* head,int index){
 //print list starting at current and downwards 
 void pav::printList(knot* head){
     knot* current = head;
-    while(true){
-        std::printf("[%u]->",current->element);
+    while(current != NULL){
+        printf("[%u]->",current->element);
         current = current->next;
-        if(current == NULL)break;
     }
-    std::printf("\n");
+    printf("NULL\n");//end of list
 }
 
-double pav::getLength(knot* head){
-    knot* current = head;
-    double length = 0;
-    while(!current){
+//get length of linklist returns double
+long pav::getLength(knot* head){
+    knot* current = head->next;
+    long length = 0;
+    while(current != NULL){
         length++;
         current = current->next;
     }
