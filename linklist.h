@@ -1,3 +1,6 @@
+#ifndef LINKLIST
+#define LINKLIST
+
 #include <cstdio>
 
 namespace pav{
@@ -32,3 +35,4 @@ namespace pav{
 
     long getLength(knot* head);
 }
+#endif
