@@ -2,11 +2,13 @@
 #include "linklist.h"
 //testfile
 int main(){
-    pav::knot* head = new pav::knot(500);
-    pav::addKnot(head,5);
-    pav::addKnot(head,7);
-    pav::insertKnot(head,10,2);
-    pav::printList(head);
-    std::printf("\tLength:%ld\n",pav::getLength(head));
+    pav::LinkList t1;
+    pav::LinkList t2;
+    t1.appKnot(1);
+    t1.printList();
+    for(int i = 0; i < 10;i++){
+        t2.appKnot(i);
+    }
+    t2.printList();
     return 0;
 }

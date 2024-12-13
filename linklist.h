@@ -2,37 +2,55 @@
 #define LINKLIST
 
 #include <cstdio>
-
+//todo: template
 namespace pav{
-    struct knot{
+    struct Knot{
         int element;
-        knot* next;
+        Knot* next;
         
-        knot(knot* knot, int nelement):
-            next(knot),
-            element(nelement)
+        Knot(Knot* t_knot, int t_element):
+            next(t_knot),
+            element(t_element)
         {}
 
-        knot(int nelement):
-            next(NULL),
-            element(nelement)
+        Knot(int t_element):
+            next(nullptr),
+            element(t_element)
         {}
-        
-        //very important --> nextknot is on heap!!!
-        ~ knot(){
+        Knot():
+            next(nullptr),
+            element(0)
+        {}
+
+        //very important --> nextKnot is on heap!!!
+        ~ Knot(){
             delete(next);
         }
 
     };
-    //add new knot to end of last knot 
-    void addKnot(knot* head,int element);
 
-    void insertKnot(knot* head,int element,int index);
+    struct LinkList{
+        Knot* head;
+        
+        LinkList():
+            head(new Knot())     
+        {}
 
-    void deleteKnot(knot* head,int index);
+        ~LinkList(){
+            delete(head);
+        }
 
-    void printList(knot* head);
+        void appKnot(int element = 0);
 
-    long getLength(knot* head);
+        void insertKnot(int element,int index);
+
+        void deleteKnot(int index);
+
+        void printList();
+
+        long getLength();
+    };
 }
+
+
 #endif
